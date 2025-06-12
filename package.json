@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "npx wrangler pages deploy ./out",
-    "deploy:preview": "npx wrangler pages deploy ./out --env=preview"
+    "deploy": "npx wrangler deploy",
+    "deploy:preview": "npx wrangler deploy --env=preview",
+    "deploy:pages": "npx wrangler pages deploy ./out"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.0",

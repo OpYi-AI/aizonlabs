@@ -39,16 +39,23 @@ The Next.js app is configured for static export with:
    - **Build output directory**: `out`
    - **Root directory**: Leave empty (or set to repository root)
 
-### Option 2: Manual Deployment via CLI
+### Option 2: Manual Deployment via CLI (Static Assets)
 ```bash
 # Build the static site
 npm run build
 
-# Deploy to Cloudflare Pages
+# Deploy to Cloudflare using wrangler.toml config
 npm run deploy
 ```
 
-### Option 3: Preview Deployment
+### Option 3: Manual Deployment via Pages CLI
+```bash
+# Build and deploy directly to Pages
+npm run build
+npm run deploy:pages
+```
+
+### Option 4: Preview Deployment
 ```bash
 # Build and deploy to preview environment
 npm run build
@@ -66,6 +73,17 @@ In your Cloudflare Pages dashboard, configure:
 **Node.js version**: 18 or later
 
 ## Configuration Files
+
+### wrangler.jsonc
+```jsonc
+{
+  "name": "aizonlabs-landing",
+  "compatibility_date": "2025-06-12",
+  "assets": {
+    "directory": "./out"
+  }
+}
+```
 
 ### next.config.mjs
 ```javascript
