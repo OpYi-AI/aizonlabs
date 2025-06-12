@@ -1,9 +1,10 @@
 # Cloudflare Pages Deployment Guide
 
-This project is configured for deployment to Cloudflare Pages using Wrangler.
+This project is configured for deployment to Cloudflare Pages.
 
 ## Prerequisites
 
+For manual deployment:
 1. Install Wrangler CLI globally:
    ```bash
    npm install -g wrangler
@@ -17,9 +18,9 @@ This project is configured for deployment to Cloudflare Pages using Wrangler.
 ## Deployment Configuration
 
 The project includes:
-- `wrangler.jsonc` - Cloudflare deployment configuration
 - `next.config.mjs` - Next.js static export configuration
 - Build scripts in `package.json`
+- Cloudflare Pages build settings (configured in dashboard)
 
 ## Build Process
 
@@ -29,9 +30,16 @@ The Next.js app is configured for static export with:
 - `images: { unoptimized: true }` - Disables Next.js image optimization for static export
 - Output directory: `./out`
 
-## Deployment Commands
+## Deployment Options
 
-### Production Deployment
+### Option 1: Cloudflare Dashboard (Recommended)
+1. Connect your GitHub repository to Cloudflare Pages
+2. Set build configuration:
+   - **Build command**: `npm run build`
+   - **Build output directory**: `out`
+   - **Root directory**: Leave empty (or set to repository root)
+
+### Option 2: Manual Deployment via CLI
 ```bash
 # Build the static site
 npm run build
@@ -40,29 +48,24 @@ npm run build
 npm run deploy
 ```
 
-### Preview Deployment
+### Option 3: Preview Deployment
 ```bash
 # Build and deploy to preview environment
 npm run build
 npm run deploy:preview
 ```
 
-### Manual Deployment
-```bash
-# Alternative: Deploy directly with wrangler pages
-npx wrangler pages deploy ./out
-```
+## Cloudflare Pages Build Settings
+
+In your Cloudflare Pages dashboard, configure:
+
+**Framework preset**: Next.js (Static HTML Export)
+**Build command**: `npm run build`
+**Build output directory**: `out`
+**Root directory**: (leave empty)
+**Node.js version**: 18 or later
 
 ## Configuration Files
-
-### wrangler.jsonc
-```jsonc
-{
-  "name": "aizonlabs-landing",
-  "compatibility_date": "2025-06-12",
-  "pages_build_output_dir": "./out"
-}
-```
 
 ### next.config.mjs
 ```javascript
@@ -89,10 +92,17 @@ After running `npm run build`, the `./out` directory contains:
 
 ## Deployment Checklist
 
+### For Dashboard Deployment:
+- [ ] Build completes successfully (`npm run build`)
+- [ ] Static files generated in `./out` directory
+- [ ] GitHub repository connected to Cloudflare Pages
+- [ ] Build settings configured in Cloudflare dashboard
+- [ ] Deploy via push to main branch
+
+### For CLI Deployment:
 - [ ] Build completes successfully (`npm run build`)
 - [ ] Static files generated in `./out` directory
 - [ ] Wrangler CLI installed and authenticated
-- [ ] Project name updated in `wrangler.jsonc` if needed
 - [ ] Deploy with `npm run deploy`
 
 ## Troubleshooting
