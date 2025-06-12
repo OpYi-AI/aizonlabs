@@ -36,7 +36,7 @@ export const Navbar = () => {
     },
     {
       name: "Contact",
-      link: "/#contact",
+      link: "/#leads-form",
     },
   ];
 

@@ -18,7 +18,7 @@ export function Footer() {
     },
     {
       title: "Contact",
-      href: "#contact",
+      href: "#leads-form",
     },
     {
       title: "About",
@@ -58,12 +58,12 @@ export function Footer() {
   const signups = [
     {
       title: "Get Started",
-      href: "#contact",
+      href: "#leads-form",
       action: null,
     },
     {
       title: "Free Audit",
-      href: "#contact",
+      href: "#leads-form",
       action: null,
     },
     {

@@ -86,7 +86,7 @@ export function FAQ() {
             Still have questions?
           </p>
           <a
-            href="#contact"
+            href="#leads-form"
             className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors duration-200"
           >
             Get Your Free AI Audit
