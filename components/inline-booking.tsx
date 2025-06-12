@@ -55,7 +55,7 @@ export function InlineBooking({
   return (
     <div 
       id={`cal-inline-${namespace}`}
-      className={`w-full ${className}`}
+      className={`w-full overflow-auto ${className}`}
       style={{ height }}
     />
   );

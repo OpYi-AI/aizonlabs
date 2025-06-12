@@ -23,7 +23,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
       
       {/* Cal.com Inline Booking - Match original size and positioning */}
       <div 
-        className="w-full max-w-5xl h-[85vh] rounded-2xl overflow-hidden"
+        className="w-full max-w-5xl h-[85vh] rounded-2xl overflow-auto"
         onClick={(e) => e.stopPropagation()}
         style={{ maxWidth: '1200px' }}
       >
