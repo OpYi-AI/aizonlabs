@@ -124,7 +124,7 @@ export function Hero() {
               el.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
           }}
-          className="relative z-50 w-48 text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-medium hover:-translate-y-0.5"
+          className="relative z-30 w-48 text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-medium hover:-translate-y-0.5"
         >
           Get Free AI Audit
         </button>
