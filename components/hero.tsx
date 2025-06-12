@@ -3,7 +3,6 @@ import React, { useRef, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Balancer from "react-wrap-balancer";
-import { BookingButton } from "./booking-button";
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -110,9 +109,17 @@ export function Hero() {
         transition={{ duration: 0.2, delay: 0.7 }}
         className="mb-10 mt-8 flex w-full justify-center px-8 md:mb-20"
       >
-        <BookingButton className="w-48 text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-medium">
+        <button
+          onClick={() => {
+            const el = document.getElementById('leads-form');
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          className="w-48 text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-medium hover:-translate-y-0.5"
+        >
           Get Free AI Audit
-        </BookingButton>
+        </button>
       </motion.div>
     </div>
   );
