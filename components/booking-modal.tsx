@@ -55,19 +55,19 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
         {/* Go back arrow - top left */}
         <button
           onClick={onClose}
-          className="absolute top-6 left-6 z-60 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm transition-all duration-200 hover:scale-105"
+          className="absolute top-4 left-4 md:top-6 md:left-6 z-60 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/90 hover:bg-white text-gray-800 hover:text-gray-900 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-105 border border-white/50"
           title="Go back"
         >
-          <IconArrowLeft className="w-6 h-6" />
+          <IconArrowLeft className="w-5 h-5 md:w-6 md:h-6" />
         </button>
 
         {/* Close button - top right */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 z-60 w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm transition-all duration-200 hover:scale-105"
+          className="absolute top-4 right-4 md:top-6 md:right-6 z-60 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/90 hover:bg-white text-gray-800 hover:text-gray-900 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-105 border border-white/50"
           title="Close"
         >
-          <IconX className="w-6 h-6" />
+          <IconX className="w-5 h-5 md:w-6 md:h-6" />
         </button>
         
         {/* Cal.com modal container with improved styling */}

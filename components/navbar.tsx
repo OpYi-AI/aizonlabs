@@ -196,17 +196,19 @@ const MobileNav = ({ navItems, visible, onBookingClick }: NavbarProps) => {
       >
         <div className="flex flex-row justify-between items-center w-full">
           <Logo />
-          {open ? (
-            <IconX
-              className="text-black dark:text-white"
-              onClick={() => setOpen(!open)}
-            />
-          ) : (
-            <IconMenu2
-              className="text-black dark:text-white"
-              onClick={() => setOpen(!open)}
-            />
-          )}
+          <div className="px-2 py-1 mr-4">
+            {open ? (
+              <IconX
+                className="text-black dark:text-white w-6 h-6"
+                onClick={() => setOpen(!open)}
+              />
+            ) : (
+              <IconMenu2
+                className="text-black dark:text-white w-6 h-6"
+                onClick={() => setOpen(!open)}
+              />
+            )}
+          </div>
         </div>
 
         <AnimatePresence>

@@ -9,12 +9,23 @@ export default function Home() {
     <main className="space-y-16">
       <Hero />
       <Features />
-      <Testimonials />
-      <section id="leads-form" className="bg-white dark:bg-neutral-950 py-20 px-4">
+      
+      {/* Lead form after features on mobile, hidden on desktop */}
+      <section id="leads-form-mobile" className="md:hidden bg-white dark:bg-neutral-950 py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <LeadForm />
         </div>
       </section>
+      
+      <Testimonials />
+      
+      {/* Lead form after testimonials on desktop, hidden on mobile */}
+      <section id="leads-form" className="hidden md:block bg-white dark:bg-neutral-950 py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <LeadForm />
+        </div>
+      </section>
+      
       <FAQ />
     </main>
   );

@@ -16,50 +16,55 @@ export function Hero() {
       <BackgroundGrids />
       <CollisionMechanism
         beamOptions={{
-          initialX: 150,
-          translateX: 150,
+          initialX: 50,
+          translateX: 50,
           duration: 4,
           repeatDelay: 4,
+          className: "hidden sm:block md:left-24 lg:left-36"
         }}
         containerRef={containerRef}
         parentRef={parentRef}
       />
       <CollisionMechanism
         beamOptions={{
-          initialX: 400,
-          translateX: 400,
+          initialX: 150,
+          translateX: 150,
           duration: 5,
           repeatDelay: 5,
+          className: "left-1/4 sm:left-1/3 md:left-80 lg:left-96"
         }}
         containerRef={containerRef}
         parentRef={parentRef}
       />
       <CollisionMechanism
         beamOptions={{
-          initialX: 700,
-          translateX: 700,
+          initialX: 250,
+          translateX: 250,
           duration: 4.5,
           repeatDelay: 6,
+          className: "left-1/2 md:left-1/2 lg:left-1/2"
         }}
         containerRef={containerRef}
         parentRef={parentRef}
       />
       <CollisionMechanism
         beamOptions={{
-          initialX: 950,
-          translateX: 950,
+          initialX: 350,
+          translateX: 350,
           duration: 5.5,
           repeatDelay: 4.5,
+          className: "left-3/4 md:left-2/3 lg:left-2/3 hidden sm:block"
         }}
         containerRef={containerRef}
         parentRef={parentRef}
       />
       <CollisionMechanism
         beamOptions={{
-          initialX: 1200,
-          translateX: 1200,
+          initialX: 450,
+          translateX: 450,
           duration: 4.8,
           repeatDelay: 5.5,
+          className: "hidden md:block lg:left-3/4"
         }}
         containerRef={containerRef}
         parentRef={parentRef}
@@ -111,12 +116,15 @@ export function Hero() {
       >
         <button
           onClick={() => {
-            const el = document.getElementById('leads-form');
+            // Check if we're on mobile or desktop and scroll to appropriate form
+            const isMobile = window.innerWidth < 768;
+            const targetId = isMobile ? 'leads-form-mobile' : 'leads-form';
+            const el = document.getElementById(targetId);
             if (el) {
               el.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
           }}
-          className="w-48 text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-medium hover:-translate-y-0.5"
+          className="relative z-50 w-48 text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-medium hover:-translate-y-0.5"
         >
           Get Free AI Audit
         </button>
@@ -255,8 +263,8 @@ const CollisionMechanism = React.forwardRef<
           repeatDelay: beamOptions.repeatDelay || 0,
         }}
         className={cn(
-          "absolute left-96 top-20 m-auto h-14 w-px rounded-full bg-gradient-to-t from-orange-500 via-yellow-500 to-transparent",
-          beamOptions.className
+          "absolute top-20 m-auto h-14 w-px rounded-full bg-gradient-to-t from-orange-500 via-yellow-500 to-transparent",
+          beamOptions.className || "left-96"
         )}
       />
       <AnimatePresence>
