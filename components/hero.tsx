@@ -1,11 +1,9 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 import Balancer from "react-wrap-balancer";
-import Link from "next/link";
-import { Button } from "./button";
+import { BookingButton } from "./booking-button";
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -112,14 +110,9 @@ export function Hero() {
         transition={{ duration: 0.2, delay: 0.7 }}
         className="mb-10 mt-8 flex w-full justify-center px-8 md:mb-20"
       >
-        <Button
-          as={Link}
-          href="#contact"
-          variant="primary"
-          className="w-48 text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-medium"
-        >
+        <BookingButton className="w-48 text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-medium">
           Get Free AI Audit
-        </Button>
+        </BookingButton>
       </motion.div>
     </div>
   );
