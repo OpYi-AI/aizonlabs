@@ -12,11 +12,19 @@ interface InlineBookingProps {
   height?: string;
 }
 
+// Type guard for layout values
+const allowedLayouts = ["month_view", "week_view", "day_view"] as const;
+const getValidLayout = (layout: string): "month_view" | "week_view" | "day_view" => {
+  return allowedLayouts.includes(layout as any) 
+    ? (layout as typeof allowedLayouts[number])
+    : "month_view";
+};
+
 export function InlineBooking({ 
   className = "",
   namespace = CONSTANTS.CALCOM_NAMESPACE,
   brandColor = CONSTANTS.CALCOM_BRAND_COLOR,
-  layout = CONSTANTS.CALCOM_LAYOUT,
+  layout = getValidLayout(CONSTANTS.CALCOM_LAYOUT),
   height = "600px"
 }: InlineBookingProps) {
   

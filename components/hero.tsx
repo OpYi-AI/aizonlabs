@@ -278,7 +278,7 @@ const CollisionMechanism = React.forwardRef<
 
 CollisionMechanism.displayName = "CollisionMechanism";
 
-const Explosion = ({ ...props }: React.HTMLProps<HTMLDivElement>) => {
+const Explosion = ({ className, style }: { className?: string; style?: React.CSSProperties }) => {
   const spans = Array.from({ length: 35 }, (_, index) => ({
     id: index,
     initialX: 0,
@@ -289,8 +289,8 @@ const Explosion = ({ ...props }: React.HTMLProps<HTMLDivElement>) => {
 
   return (
     <motion.div 
-      {...props} 
-      className={cn("absolute z-50 h-4 w-4", props.className)}
+      className={cn("absolute z-50 h-4 w-4", className)}
+      style={style}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
