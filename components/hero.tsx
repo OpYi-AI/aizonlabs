@@ -12,7 +12,7 @@ export function Hero() {
       ref={parentRef}
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 py-20 md:px-8 md:py-40 bg-neutral-50 dark:bg-neutral-900"
     >
-      <div ref={containerRef} className="absolute inset-0 z-10" />
+      <div ref={containerRef} className="absolute inset-0 z-10 pointer-events-none" />
       <BackgroundGrids />
       <CollisionMechanism
         beamOptions={{
@@ -107,23 +107,16 @@ export function Hero() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.2, delay: 0.7 }}
-        className="mb-10 mt-8 flex w-full justify-center px-8 md:mb-20 relative z-40"
-        style={{ pointerEvents: 'auto' }}
+        className="mb-10 mt-8 flex w-full justify-center px-8 md:mb-20"
       >
         <button
-          onClick={(e) => {
-            e.preventDefault();
-            console.log('Hero button clicked!');
+          onClick={() => {
             const el = document.getElementById('leads-form');
-            console.log('Found element:', el);
             if (el) {
               el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else {
-              console.error('Element with id "leads-form" not found');
             }
           }}
-          className="relative z-50 w-48 text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-medium hover:-translate-y-0.5 cursor-pointer"
-          style={{ pointerEvents: 'auto' }}
+          className="w-48 text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-medium hover:-translate-y-0.5"
         >
           Get Free AI Audit
         </button>
