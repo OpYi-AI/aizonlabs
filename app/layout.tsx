@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "AizonLabs | AI Automation Solutions",
   description:
-    "AizonLabs provides AI automation solutions for lead generation, chatbots, and email outreach. Built with Next.js, Tailwind CSS, TypeScript and framer motion.",
+    "AizonLabs provides AI automation solutions for lead generation, chatbots, and email outreach.",
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
