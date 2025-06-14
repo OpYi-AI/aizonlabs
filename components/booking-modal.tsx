@@ -51,11 +51,11 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
       />
       
       {/* Modal container */}
-      <div className="relative w-full h-full flex items-center justify-center p-4 md:p-6">
+      <div className="relative w-full h-full flex items-center justify-center p-2 md:p-6">
         {/* Go back arrow - top left */}
         <button
           onClick={onClose}
-          className="absolute top-4 left-4 md:top-6 md:left-6 z-60 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/90 hover:bg-white text-gray-800 hover:text-gray-900 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-105 border border-white/50"
+          className="absolute top-3 left-3 md:top-6 md:left-6 z-60 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/90 hover:bg-white text-gray-800 hover:text-gray-900 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-105 border border-white/50"
           title="Go back"
         >
           <IconArrowLeft className="w-5 h-5 md:w-6 md:h-6" />
@@ -64,7 +64,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
         {/* Close button - top right */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 md:top-6 md:right-6 z-60 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/90 hover:bg-white text-gray-800 hover:text-gray-900 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-105 border border-white/50"
+          className="absolute top-3 right-3 md:top-6 md:right-6 z-60 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/90 hover:bg-white text-gray-800 hover:text-gray-900 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-105 border border-white/50"
           title="Close"
         >
           <IconX className="w-5 h-5 md:w-6 md:h-6" />
@@ -72,7 +72,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
         
         {/* Cal.com modal container with improved styling */}
         <div 
-          className="relative w-full max-w-6xl h-[90vh] md:h-[85vh] bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl overflow-hidden"
+          className="relative w-full max-w-full md:max-w-6xl h-[96vh] md:h-[85vh] bg-white dark:bg-neutral-900 rounded-xl md:rounded-2xl shadow-2xl overflow-hidden"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Scrollable content area */}

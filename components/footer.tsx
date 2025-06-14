@@ -7,22 +7,36 @@ import { BookingModal } from "./booking-modal";
 export function Footer() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState<boolean>(false);
 
+  const handleScrollToForm = () => {
+    // Check if we're on mobile or desktop and scroll to appropriate form
+    const isMobile = window.innerWidth < 768;
+    const targetId = isMobile ? 'leads-form-mobile' : 'leads-form';
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   const pages = [
     {
       title: "Home",
       href: "/",
+      action: null,
     },
     {
       title: "Services",
-      href: "#features",
-    },
-    {
-      title: "Contact",
-      href: "#leads-form",
+      href: "/services",
+      action: null,
     },
     {
       title: "About",
-      href: "#features",
+      href: "/about",
+      action: null,
+    },
+    {
+      title: "Contact",
+      href: "/contact",
+      action: null,
     },
   ];
 
@@ -58,12 +72,12 @@ export function Footer() {
   const signups = [
     {
       title: "Get Started",
-      href: "#leads-form",
+      href: "/contact",
       action: null,
     },
     {
       title: "Free Audit",
-      href: "#leads-form",
+      href: "/contact",
       action: null,
     },
     {
@@ -94,7 +108,7 @@ export function Footer() {
                 <li key={"pages" + idx} className="list-none">
                   <Link
                     className="transition-colors hover:text-text-neutral-800 "
-                    href={page.href}
+                    href={page.href || "#"}
                   >
                     {page.title}
                   </Link>
@@ -157,7 +171,7 @@ export function Footer() {
                   ) : (
                     <Link
                       className="transition-colors hover:text-text-neutral-800 "
-                      href={auth.href}
+                      href={auth.href || "#"}
                     >
                       {auth.title}
                     </Link>

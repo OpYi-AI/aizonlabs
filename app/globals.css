@@ -34,6 +34,13 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Account for mobile navbar height */
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 90px; /* Account for desktop navbar height */
+  }
 }
 
 body {

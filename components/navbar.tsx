@@ -18,25 +18,39 @@ import { CONSTANTS } from "@/constants/links";
 interface NavbarProps {
   navItems: {
     name: string;
-    link: string;
+    link: string | null;
+    action: (() => void) | null;
   }[];
   visible: boolean;
   onBookingClick: () => void;
 }
 
 export const Navbar = () => {
+  const handleScrollToForm = () => {
+    // Check if we're on mobile or desktop and scroll to appropriate form
+    const isMobile = window.innerWidth < 768;
+    const targetId = isMobile ? 'leads-form-mobile' : 'leads-form';
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   const navItems = [
     {
       name: "Services",
-      link: "/#features",
+      link: "/services",
+      action: null,
     },
     {
       name: "About",
-      link: "/#testimonials",
+      link: "/about",
+      action: null,
     },
     {
       name: "Contact",
-      link: "/#leads-form",
+      link: "/contact",
+      action: null,
     },
   ];
 
@@ -102,20 +116,37 @@ const DesktopNav = ({ navItems, visible, onBookingClick }: NavbarProps) => {
       <Logo />
       <motion.div className="lg:flex flex-row flex-1 absolute inset-0 hidden items-center justify-center space-x-2 lg:space-x-2 text-sm text-zinc-600 font-medium hover:text-zinc-800 transition duration-200">
         {navItems.map((navItem: any, idx: number) => (
-          <Link
-            onMouseEnter={() => setHovered(idx)}
-            className="text-neutral-600 dark:text-neutral-300 relative px-4 py-2"
-            key={`link=${idx}`}
-            href={navItem.link}
-          >
-            {hovered === idx && (
-              <motion.div
-                layoutId="hovered"
-                className="w-full h-full absolute inset-0 bg-gray-100 dark:bg-neutral-800 rounded-full"
-              />
-            )}
-            <span className="relative z-20">{navItem.name}</span>
-          </Link>
+          navItem.action ? (
+            <button
+              key={`link=${idx}`}
+              onMouseEnter={() => setHovered(idx)}
+              onClick={navItem.action}
+              className="text-neutral-600 dark:text-neutral-300 relative px-4 py-2 cursor-pointer"
+            >
+              {hovered === idx && (
+                <motion.div
+                  layoutId="hovered"
+                  className="w-full h-full absolute inset-0 bg-gray-100 dark:bg-neutral-800 rounded-full"
+                />
+              )}
+              <span className="relative z-20">{navItem.name}</span>
+            </button>
+          ) : (
+            <Link
+              onMouseEnter={() => setHovered(idx)}
+              className="text-neutral-600 dark:text-neutral-300 relative px-4 py-2"
+              key={`link=${idx}`}
+              href={navItem.link || "#"}
+            >
+              {hovered === idx && (
+                <motion.div
+                  layoutId="hovered"
+                  className="w-full h-full absolute inset-0 bg-gray-100 dark:bg-neutral-800 rounded-full"
+                />
+              )}
+              <span className="relative z-20">{navItem.name}</span>
+            </Link>
+          )
         ))}
       </motion.div>
       <div className="flex items-center gap-4">
@@ -190,13 +221,13 @@ const MobileNav = ({ navItems, visible, onBookingClick }: NavbarProps) => {
           damping: 50,
         }}
         className={cn(
-          "flex relative flex-col lg:hidden w-full justify-between items-center bg-transparent   max-w-[calc(100vw-2rem)] mx-auto px-0 py-2 z-50",
+          "flex relative flex-col lg:hidden w-full justify-between items-center bg-transparent   max-w-[calc(100vw-2rem)] mx-auto px-0 py-1 z-50",
           visible && "bg-white/80 dark:bg-neutral-950/80"
         )}
       >
         <div className="flex flex-row justify-between items-center w-full">
           <Logo />
-          <div className="px-2 py-1 mr-4">
+          <div className="px-1 py-0.5 mr-4">
             {open ? (
               <IconX
                 className="text-black dark:text-white w-6 h-6"
@@ -213,40 +244,145 @@ const MobileNav = ({ navItems, visible, onBookingClick }: NavbarProps) => {
 
         <AnimatePresence>
           {open && (
-            <motion.div
-              initial={{
-                opacity: 0,
-              }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="flex rounded-lg absolute top-16 bg-white dark:bg-neutral-950 inset-x-0 z-50 flex-col items-start justify-start gap-4 w-full px-4 py-8 shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            >
-              {navItems.map((navItem: any, idx: number) => (
-                <Link
-                  key={`link=${idx}`}
-                  href={navItem.link}
-                  onClick={() => setOpen(false)}
-                  className="relative text-neutral-600 dark:text-neutral-300"
-                >
-                  <motion.span className="block">{navItem.name} </motion.span>
-                </Link>
-              ))}
-              <Button
-                as={Link}
+            <>
+              {/* Backdrop overlay with blur */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
                 onClick={() => setOpen(false)}
-                href={CONSTANTS.LOGIN_LINK}
-                variant="primary"
-                className="block md:hidden w-full"
+              />
+              
+              {/* Menu container with smooth slide animation */}
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  scale: 0.95,
+                  y: -20,
+                }}
+                animate={{ 
+                  opacity: 1,
+                  scale: 1,
+                  y: 0,
+                }}
+                exit={{ 
+                  opacity: 0,
+                  scale: 0.95,
+                  y: -20,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 30,
+                  duration: 0.3
+                }}
+                className="flex rounded-xl absolute top-16 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-xl inset-x-0 z-50 flex-col items-start justify-start gap-2 w-full px-6 py-6 shadow-2xl border border-neutral-200/50 dark:border-neutral-800/50"
               >
-                Login
-              </Button>
-              <button
-                onClick={onBookingClick}
-                className="block md:hidden w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 font-medium text-center"
+              {navItems.map((navItem: any, idx: number) => (
+                <motion.div
+                  key={`nav-item-${idx}`}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{
+                    delay: idx * 0.1,
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 25
+                  }}
+                  className="w-full"
+                >
+                  {navItem.action ? (
+                    <button
+                      onClick={() => {
+                        navItem.action();
+                        setOpen(false);
+                      }}
+                      className="w-full text-left py-3 px-4 rounded-lg text-neutral-700 dark:text-neutral-200 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-950/30 dark:hover:to-purple-950/30 transition-all duration-200 font-medium cursor-pointer group"
+                    >
+                      <span className="group-hover:translate-x-1 transition-transform duration-200 inline-block">
+                        {navItem.name}
+                      </span>
+                    </button>
+                  ) : (
+                    <Link
+                      href={navItem.link || "#"}
+                      onClick={() => setOpen(false)}
+                      className="block w-full py-3 px-4 rounded-lg text-neutral-700 dark:text-neutral-200 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-950/30 dark:hover:to-purple-950/30 transition-all duration-200 font-medium group"
+                    >
+                      <span className="group-hover:translate-x-1 transition-transform duration-200 inline-block">
+                        {navItem.name}
+                      </span>
+                    </Link>
+                  )}
+                </motion.div>
+              ))}
+              
+              {/* Separator line */}
+              <motion.div
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                exit={{ opacity: 0, scaleX: 0 }}
+                transition={{
+                  delay: navItems.length * 0.1 + 0.1,
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 25
+                }}
+                className="w-full h-px bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-2"
+              />
+              
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{
+                  delay: navItems.length * 0.1 + 0.2,
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 25
+                }}
+                className="w-full"
               >
-                Book a call
-              </button>
+                <Button
+                  as={Link}
+                  onClick={() => setOpen(false)}
+                  href={CONSTANTS.LOGIN_LINK}
+                  variant="primary"
+                  className="block md:hidden w-full mb-3 hover:scale-[1.02] transition-transform duration-200"
+                >
+                  Login
+                </Button>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{
+                  delay: navItems.length * 0.1 + 0.3,
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 25
+                }}
+                className="w-full"
+              >
+                <button
+                  onClick={() => {
+                    onBookingClick();
+                    setOpen(false);
+                  }}
+                  className="block md:hidden w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200 font-medium text-center group"
+                >
+                  <span className="group-hover:scale-105 transition-transform duration-200 inline-block">
+                    Book a call
+                  </span>
+                </button>
+              </motion.div>
             </motion.div>
+            </>
           )}
         </AnimatePresence>
       </motion.div>

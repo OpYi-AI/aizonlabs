@@ -69,6 +69,39 @@ export function Hero() {
         containerRef={containerRef}
         parentRef={parentRef}
       />
+      <CollisionMechanism
+        beamOptions={{
+          initialX: 100,
+          translateX: 100,
+          duration: 6,
+          repeatDelay: 3.5,
+          className: "left-1/5 md:left-48 lg:left-56"
+        }}
+        containerRef={containerRef}
+        parentRef={parentRef}
+      />
+      <CollisionMechanism
+        beamOptions={{
+          initialX: 300,
+          translateX: 300,
+          duration: 5.2,
+          repeatDelay: 4.8,
+          className: "left-3/5 md:left-3/5 lg:left-3/5"
+        }}
+        containerRef={containerRef}
+        parentRef={parentRef}
+      />
+      <CollisionMechanism
+        beamOptions={{
+          initialX: 400,
+          translateX: 400,
+          duration: 4.3,
+          repeatDelay: 6.2,
+          className: "right-1/4 md:right-1/3 lg:right-1/3 hidden sm:block"
+        }}
+        containerRef={containerRef}
+        parentRef={parentRef}
+      />
 
       <div className="text-balance relative z-20 mx-auto mb-4 mt-4 max-w-4xl text-center text-3xl font-semibold tracking-tight text-gray-700 dark:text-neutral-300 md:text-7xl">
         <Balancer>
@@ -116,13 +149,7 @@ export function Hero() {
       >
         <button
           onClick={() => {
-            // Check if we're on mobile or desktop and scroll to appropriate form
-            const isMobile = window.innerWidth < 768;
-            const targetId = isMobile ? 'leads-form-mobile' : 'leads-form';
-            const el = document.getElementById(targetId);
-            if (el) {
-              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            window.location.href = '/contact';
           }}
           className="relative z-30 w-48 text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-200 font-medium hover:-translate-y-0.5"
         >

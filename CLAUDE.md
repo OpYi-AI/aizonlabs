@@ -8,6 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run build` - Build for production (static export to `./out`)
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
+- `npx tsc --noEmit` - Type check without emitting files
 - `npm run deploy` - Deploy to Cloudflare using Wrangler
 - `npm run deploy:preview` - Deploy to Cloudflare preview environment
 - `npm run deploy:pages` - Deploy to Cloudflare Pages directly
